@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PacMan", "PacMan\PacMan.vcxproj", "{CB615736-9801-4D1B-B669-69840BCCF6C8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PacMan 2", "PacMan 2\PacMan 2.vcxproj", "{D8ACA604-1C89-4CDE-B1F8-380BE924730E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB615736-9801-4D1B-B669-69840BCCF6C8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CB615736-9801-4D1B-B669-69840BCCF6C8}.Debug|Win32.Build.0 = Debug|Win32
+		{CB615736-9801-4D1B-B669-69840BCCF6C8}.Release|Win32.ActiveCfg = Release|Win32
+		{CB615736-9801-4D1B-B669-69840BCCF6C8}.Release|Win32.Build.0 = Release|Win32
+		{D8ACA604-1C89-4CDE-B1F8-380BE924730E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D8ACA604-1C89-4CDE-B1F8-380BE924730E}.Debug|Win32.Build.0 = Debug|Win32
+		{D8ACA604-1C89-4CDE-B1F8-380BE924730E}.Release|Win32.ActiveCfg = Release|Win32
+		{D8ACA604-1C89-4CDE-B1F8-380BE924730E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

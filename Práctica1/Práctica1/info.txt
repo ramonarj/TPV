@@ -1,0 +1,19 @@
+Alejandro Villar Rubio
+Ramón Arjona Quiñones
+
+Creemos que el programa funciona correctamente y no deja basura
+
+Funcionalidades opcionales:
+   - Puntuación y vidas: hay sistema de puntuación en el juego, por el cual 
+     la comida da 10 puntos, las vitaminas 50 y comerse a los fantasmas, 200. 
+     Pacman cuenta con 3 vidas, y cuando se le acaban, termina el juego.
+   - Paso de niveles: el juego empieza en el nivel 1 y va pasando de nivel
+     cuando PacMan se come la comida del nivel actual, hasta un máximo de 5.
+   - Animaciones: tanto PacMan como los fantasmas tienen animaciones en las 
+     4 direcciones. Estos últimos tienen una especial para cuando PacMan 
+     tiene el power-up, parpadeando cuando queda poco tiempo.
+   - Registro de HighScores: cuando se acaba una partida, se guarda la puntuación
+     (si es el caso) en un archivo con las 10 mejores puntuaciones. 
+   - HUD: hemos creado la clase HUD, con un array de texturas y otro de SDL_Rects
+     (uno para cada textura) para renderizar las vidas, puntuación, HighScore, menú
+     y mensajes de "Ready", "Win" y "GameOver".
