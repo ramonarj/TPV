@@ -1,5 +1,6 @@
 #include "GameManagerPhysics.h"
 #include "GameManager.h"
+#include "messages.h"
 
 GameManagerPhysics::GameManagerPhysics() {
 	// TODO Auto-generated constructor stub

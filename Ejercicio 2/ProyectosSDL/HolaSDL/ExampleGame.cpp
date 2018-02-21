@@ -15,6 +15,7 @@
 #include "GameMsgRenderer.h"
 #include "GameCtrlInputComponent.h"
 #include "GameManagerPhysics.h"
+#include "Observer.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_),
@@ -60,6 +61,7 @@ void ExampleGame::initGame() {
 	paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
 	ballPC_ = new BallPhysics(leftPaddle_, rightPaddle_);
+	static_cast<BallPhysics*>(ballPC_)->init(ball_);
 	gameManagerPC_ = new GameManagerPhysics();
 
 	fillrectRC_ = new FillRectRenderer();
@@ -107,6 +109,7 @@ void ExampleGame::initGame() {
 	cs2_->setMode(0);
 
 	dynamic_cast<Observable*>(ballPC_)->registerObserver(&soundManager_);
+	dynamic_cast<Observable*>(ballPC_)->registerObserver(dynamic_cast<Observer*>(ballPC_));
 	dynamic_cast<Observable*>(gameManager_)->registerObserver(&soundManager_);
 
 	actors_.push_back(gameManager_);

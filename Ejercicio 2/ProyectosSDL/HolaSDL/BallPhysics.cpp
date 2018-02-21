@@ -4,7 +4,7 @@
 
 BallPhysics::BallPhysics(GameObject* leftPaddle,
 		GameObject* rightPadlle) :
-		leftPaddle_(leftPaddle), rightPaddle_(rightPadlle) {
+		leftPaddle_(leftPaddle), rightPaddle_(rightPadlle), ball_(nullptr) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -13,12 +13,36 @@ BallPhysics::~BallPhysics() {
 	// TODO Auto-generated destructor stub
 }
 
+void BallPhysics::receive(Message msg)
+{
+	switch (msg.id_) {
+	case ROUND_START:
+		startRound();
+		break;
+	}
+}
+
+void BallPhysics::init(GameObject* o)
+{
+	ball_ = o;
+
+}
+
+void BallPhysics::startRound()
+{
+	int dx = 1 - 2 * (rand() % 2); // 1 or -1
+	int dy = 1 - 2 * (rand() % 2); // 1 or -1
+	Vector2D v(dx * ((rand() % 5) + 2), dy * ((rand() % 5) + 2));
+	v.normalize();
+	ball_->setVelocity(v * 2);
+}
+
 void BallPhysics::update(GameObject* o, Uint32 time) {
 
-	Vector2D velocity = o->getVelocity();
-	Vector2D position = o->getPosition()+velocity;
+	Vector2D velocity = ball_->getVelocity();
+	Vector2D position = ball_->getPosition() + velocity;
 
-	double height = o->getHeight();
+	double height = ball_->getHeight();
 
 	// upper wall
 	if ( position.getY()+height >= o->getGame()->getWindowHeight() ) {
