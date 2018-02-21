@@ -36,6 +36,7 @@ public:
 	virtual void update(Uint32 time) = 0;
 	virtual void render(Uint32 time) = 0;
 	virtual void rotation(Uint32 time, const SDL_Event& event) = 0;
+	virtual void acceleration(Uint32 time, const SDL_Event& event) = 0;
 
 protected:
 	SDLGame* game_; // pointer to the game

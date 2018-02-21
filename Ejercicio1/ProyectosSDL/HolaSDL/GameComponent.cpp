@@ -31,6 +31,13 @@ void GameComponent::rotation(Uint32 time, const SDL_Event& event) {
 	}
 }
 
+void GameComponent::acceleration(Uint32 time, const SDL_Event & event)
+{
+	for (AccelerationInputComponent* rtc : accelerationComp_) {
+		rtc->acceleration(this, time, event);
+	}
+}
+
 void GameComponent::addInputComponent(InputComponent* ic) {
 	inputComp_.push_back(ic);
 }
@@ -45,6 +52,11 @@ void GameComponent::addRenderComponent(RenderComponent* rc) {
 
 void GameComponent::addRotationInputComponent(RotationInputComponent* rtc) {
 	rotationComp_.push_back(rtc);
+}
+
+void GameComponent::addAccelerationInputComponent(AccelerationInputComponent * aic)
+{
+	accelerationComp_.push_back(aic);
 }
 
 void GameComponent::delInputComponent(InputComponent* ic) {
@@ -73,4 +85,12 @@ void GameComponent::delRotationInputComponent(RotationInputComponent* rtc) {
 		rotationComp_.begin(), rotationComp_.end(), rtc);
 	if (position != rotationComp_.end())
 		rotationComp_.erase(position);
+}
+
+void GameComponent::delAccelerationInputComponent(AccelerationInputComponent * aic)
+{
+	std::vector<AccelerationInputComponent*>::iterator position = std::find(
+		accelerationComp_.begin(), accelerationComp_.end(), aic);
+	if (position != accelerationComp_.end())
+		accelerationComp_.erase(position);
 }

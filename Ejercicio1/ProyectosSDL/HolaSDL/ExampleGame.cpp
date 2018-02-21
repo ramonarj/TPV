@@ -37,6 +37,7 @@ void ExampleGame::initGame() {
 			SDLK_d);
 	physicsComp_ = new CircularMotionPhysics();
 	rotationComp_ = new RotationInputComponent(5, SDLK_RIGHT, SDLK_LEFT);
+	accelerationComp_ = new AccelerationInputComponent(0.5, 10.0, SDLK_UP, SDLK_DOWN);
 
 	// choose either the filled rectangle or the image renderer
 	//
@@ -54,6 +55,7 @@ void ExampleGame::initGame() {
 	demoComp_->addPhysicsComponent(physicsComp_);
 	demoComp_->addRenderComponent(renderComp_);
 	demoComp_->addRotationInputComponent(rotationComp_);
+	demoComp_->addAccelerationInputComponent(accelerationComp_);
 	actors_.push_back(demoComp_);
 }
 
@@ -111,6 +113,7 @@ void ExampleGame::handleInput(Uint32 time) {
 		for (GameObject* o : actors_) {
 			o->handleInput(time, event);
 			o->rotation(time, event);
+			o->acceleration(time, event);
 		}
 	}
 }

@@ -6,6 +6,7 @@
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
 #include "RotationInputComponent.h"
+#include "AccelerationInputComponent.h"
 #include <vector>
 
 using namespace std;
@@ -21,22 +22,26 @@ public:
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void rotation(Uint32 time, const SDL_Event& event);
+	virtual void acceleration(Uint32 time, const SDL_Event& event);
 
 	virtual void addInputComponent(InputComponent* ic);
 	virtual void addPhysicsComponent(PhysicsComponent* pc);
 	virtual void addRenderComponent(RenderComponent* rc);
 	virtual void addRotationInputComponent(RotationInputComponent* rtc);
+	virtual void addAccelerationInputComponent(AccelerationInputComponent* aic);
 
 	virtual void delInputComponent(InputComponent* ic);
 	virtual void delPhysicsComponent(PhysicsComponent* pc);
 	virtual void delRenderComponent(RenderComponent* rc);
 	virtual void delRotationInputComponent(RotationInputComponent* rtc);
+	virtual void delAccelerationInputComponent(AccelerationInputComponent* aic);
 
 private:
 	vector<InputComponent*> inputComp_;
 	vector<PhysicsComponent*> physicsComp_;
 	vector<RenderComponent*> renderComp_;
 	vector<RotationInputComponent*> rotationComp_;
+	vector<AccelerationInputComponent*> accelerationComp_;
 };
 
 #endif /* GAMECOMPONENT_H_ */

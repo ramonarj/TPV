@@ -35,6 +35,7 @@ private:
 	PhysicsComponent* physicsComp_;
 	RenderComponent* renderComp_;
 	RotationInputComponent* rotationComp_;
+	AccelerationInputComponent* accelerationComp_;
 };
 
 #endif /* EXAMPLEGAME_H_ */
