@@ -72,6 +72,7 @@
     <ClCompile Include="AccelerationInputComponent.cpp" />
     <ClCompile Include="BasicKBCtrlComponent.cpp" />
     <ClCompile Include="BasicMotionPhysics.cpp" />
+    <ClCompile Include="BulletsManager.cpp" />
     <ClCompile Include="CircularMotionPhysics.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="DemoActor.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="SDLGame.cpp" />
     <ClCompile Include="SkeletonRenderer.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="StarWarsBulletsManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
@@ -98,6 +100,7 @@
     <ClInclude Include="AccelerationInputComponent.h" />
     <ClInclude Include="BasicKBCtrlComponent.h" />
     <ClInclude Include="BasicMotionPhysics.h" />
+    <ClInclude Include="BulletsManager.h" />
     <ClInclude Include="CircularMotionPhysics.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="DemoActor.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="sdl_includes.h" />
     <ClInclude Include="SkeletonRenderer.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="StarWarsBulletsManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
