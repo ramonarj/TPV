@@ -81,6 +81,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GunInputComponent.cpp" />
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GunInputComponent.h" />
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Music.h" />

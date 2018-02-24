@@ -38,6 +38,13 @@ void GameComponent::acceleration(Uint32 time, const SDL_Event & event)
 	}
 }
 
+void GameComponent::shoot(Uint32 time, const SDL_Event & event)
+{
+	for (GunInputComponent* gic : gunComp_) {
+		gic->handleInput(this, time, event);
+	}
+}
+
 void GameComponent::addInputComponent(InputComponent* ic) {
 	inputComp_.push_back(ic);
 }
@@ -57,6 +64,11 @@ void GameComponent::addRotationInputComponent(RotationInputComponent* rtc) {
 void GameComponent::addAccelerationInputComponent(AccelerationInputComponent * aic)
 {
 	accelerationComp_.push_back(aic);
+}
+
+void GameComponent::addGunInputComponent(GunInputComponent * gic)
+{
+	gunComp_.push_back(gic);
 }
 
 void GameComponent::delInputComponent(InputComponent* ic) {
@@ -93,4 +105,12 @@ void GameComponent::delAccelerationInputComponent(AccelerationInputComponent * a
 		accelerationComp_.begin(), accelerationComp_.end(), aic);
 	if (position != accelerationComp_.end())
 		accelerationComp_.erase(position);
+}
+
+void GameComponent::delGunInputComponent(GunInputComponent * gic)
+{
+	std::vector<GunInputComponent*>::iterator position = std::find(
+		gunComp_.begin(), gunComp_.end(), gic);
+	if (position != gunComp_.end())
+		gunComp_.erase(position);
 }

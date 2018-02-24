@@ -6,6 +6,9 @@
 #include "SDLGame.h"
 #include "GameObject.h"
 #include "GameComponent.h"
+#include "StarWarsBulletsManager.h"
+#include "GunInputComponent.h"
+#include "SkeletonRenderer.h"
 
 class ExampleGame: public SDLGame {
 
@@ -36,6 +39,12 @@ private:
 	RenderComponent* renderComp_;
 	RotationInputComponent* rotationComp_;
 	AccelerationInputComponent* accelerationComp_;
+	GunInputComponent* gunComp_;
+	SkeletonRendered* skeComp;
+
+	GameComponent* bullet;
+	StarWarsBulletsManager* bulletsMan_;
 };
+
 
 #endif /* EXAMPLEGAME_H_ */

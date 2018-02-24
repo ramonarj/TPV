@@ -24,7 +24,7 @@ void ExampleGame::initGame() {
 
 	// normal game object
 	/*demoObj_ = new DemoActor(this);
-	demoObj_->setWidth(10);
+	/*demoObj_->setWidth(10);
 	demoObj_->setHeight(10);
 	demoObj_->setPosition(
 			Vector2D(getWindowWidth() / 2 - 5, getWindowHeight() / 2 - 5));
@@ -34,10 +34,14 @@ void ExampleGame::initGame() {
 	// game object based on component
 	demoComp_ = new GameComponent(this);
 	inputComp_ = new BasicKBCtrlComponent(SDLK_a, SDLK_d, SDLK_w, SDLK_s,
-			SDLK_d);
+		SDLK_d);
 	physicsComp_ = new CircularMotionPhysics();
 	rotationComp_ = new RotationInputComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp_ = new AccelerationInputComponent(0.5, 10.0, SDLK_UP, SDLK_DOWN);
+
+	bulletsMan_ = new StarWarsBulletsManager(this);
+	gunComp_ = new GunInputComponent(bulletsMan_, SDLK_SPACE);
+	skeComp = new SkeletonRendered();
 
 	// choose either the filled rectangle or the image renderer
 	//
@@ -56,6 +60,8 @@ void ExampleGame::initGame() {
 	demoComp_->addRenderComponent(renderComp_);
 	demoComp_->addRotationInputComponent(rotationComp_);
 	demoComp_->addAccelerationInputComponent(accelerationComp_);
+	demoComp_->addGunInputComponent(gunComp_);
+	demoComp_->addRenderComponent(skeComp);
 	actors_.push_back(demoComp_);
 }
 
@@ -114,6 +120,7 @@ void ExampleGame::handleInput(Uint32 time) {
 			o->handleInput(time, event);
 			o->rotation(time, event);
 			o->acceleration(time, event);
+			o->shoot(time, event);
 		}
 	}
 }
@@ -122,6 +129,7 @@ void ExampleGame::update(Uint32 time) {
 	for (GameObject* o : actors_) {
 		o->update(time);
 	}
+	bulletsMan_->update(time);
 }
 
 void ExampleGame::render(Uint32 time) {
@@ -131,6 +139,7 @@ void ExampleGame::render(Uint32 time) {
 	for (GameObject* o : actors_) {
 		o->render(time);
 	}
+	bulletsMan_->render(time);
 
 	SDL_RenderPresent(getRenderer());
 }

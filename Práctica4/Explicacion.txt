@@ -1,0 +1,16 @@
+Fighter: public Container
+
+BulletsMan tendra una lista de bullets y las reutiliza
+
+AstMan crea los asteroides y tiene una lista de asteriodes
+
+
+BulletsMan
+AstMan
+FighterMan
+CollisionMan:
+	update(): pide al BulletMan la lista de bullets y la lista de AstMan y ve si hay colisiones
+		si colisionan, manda un mensaje con la bala y el asteroide determinado
+SoundMan escucha mensajes y reproduce sonidos
+GameManager
+	Control del marcador y cambiar armas

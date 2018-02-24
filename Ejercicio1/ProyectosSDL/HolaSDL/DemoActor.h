@@ -15,6 +15,7 @@ public:
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void rotation(Uint32 time, const SDL_Event& event) {};
+	virtual void acceleration(Uint32 time, const SDL_Event& event) {};
 
 };
 
