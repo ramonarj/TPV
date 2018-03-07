@@ -40,7 +40,7 @@ void ExampleGame::initGame() {
 	accelerationComp_ = new AccelerationInputComponent(0.5, 10.0, SDLK_UP, SDLK_DOWN);
 
 	bulletsMan_ = new StarWarsBulletsManager(this);
-	gunComp_ = new GunInputComponent(bulletsMan_, SDLK_SPACE);
+	gunComp_ = new GunInputComponent(bulletsMan_, SDLK_SPACE, 2, 50);
 	skeComp = new SkeletonRendered();
 
 	// choose either the filled rectangle or the image renderer

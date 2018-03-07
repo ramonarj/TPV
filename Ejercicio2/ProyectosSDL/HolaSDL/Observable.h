@@ -12,7 +12,8 @@ class Observable {
 public:
 	Observable();
 	virtual ~Observable();
-	virtual void send(Message msg);
+	virtual void send(Message 
+	);
 	virtual void registerObserver(Observer* o);
 private:
 	std::vector<Observer*> observers_;

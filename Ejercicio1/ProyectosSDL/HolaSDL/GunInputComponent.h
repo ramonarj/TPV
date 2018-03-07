@@ -6,7 +6,7 @@
 
 class GunInputComponent {
 public:
-	GunInputComponent(BulletsManager* bulletMan_, SDL_Keycode shootKey);
+	GunInputComponent(BulletsManager* bulletMan_, SDL_Keycode shootKey, Uint8 shotsPerInterval, Uint32 timeInterval);
 	~GunInputComponent();
 
 	virtual void GunInputComponent::handleInput(GameObject* o, Uint32 time,
@@ -15,5 +15,9 @@ public:
 private:
 	BulletsManager* bulletMan_;
 	SDL_Keycode shootKey;
+	Uint8 shotsPerInterval;
+	Uint8 numShots;
+	Uint32 timeInterval;
+	Uint32 time_;
 };
 
