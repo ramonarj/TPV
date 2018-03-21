@@ -26,7 +26,7 @@ public:
 		SpaceShips,
 		Airplanes,
 		Star,
-		Astroid,
+		Asteroid,
 		ExplosionImage,
 		Badges
 	};

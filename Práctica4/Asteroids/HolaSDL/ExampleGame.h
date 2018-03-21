@@ -12,6 +12,7 @@
 #include "GameManager.h"
 #include "SoundManager.h"
 
+
 const int _WINDOW_WIDTH_ = 800;
 const int _WINDOW_HEIGHT_ = 600;
 
@@ -22,6 +23,8 @@ public:
 	virtual ~ExampleGame();
 
 	// from SDLGame
+	void initGame();
+	void closeGame();
 	void start();
 	void stop();
 

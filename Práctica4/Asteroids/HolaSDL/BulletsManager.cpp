@@ -2,7 +2,7 @@
 
 
 
-BulletsManager::BulletsManager()
+BulletsManager::BulletsManager(): Observable(), Observer()
 {
 }
 

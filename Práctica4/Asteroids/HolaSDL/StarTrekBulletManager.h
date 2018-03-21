@@ -17,7 +17,7 @@ public:
 	virtual vector<Bullet*>& getBullets() { return bullets_; };
 
 private:
-	Bullet* getBullet() { return nullptr; };
+	Bullet* getBullet();
 	virtual void receive(Message* msg);
 	virtual void shoot(Fighter* owner, Vector2D position, Vector2D velocity);
 

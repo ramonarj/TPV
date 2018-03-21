@@ -23,8 +23,10 @@ public:
 private:
 	Asteroid* getAsteroid();
 	void initAsteroids();
+	void createBabyAsteroid(Asteroid* a);
 
 	vector<Asteroid*> asteroids_;
+
 	ImageRenderer asteroidImage_;
 	CircularMotionPhysics circularPhysics_;
 	RotationPhysics rotationPhysics_;

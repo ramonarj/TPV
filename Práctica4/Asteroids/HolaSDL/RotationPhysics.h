@@ -6,6 +6,9 @@ public:
 	RotationPhysics();
 	~RotationPhysics();
 
-	virtual void update(GameObject* o, Uint32 time) {};
+	virtual void update(GameObject* o, Uint32 time);
+
+private:
+	int velRotation_;
 };
 

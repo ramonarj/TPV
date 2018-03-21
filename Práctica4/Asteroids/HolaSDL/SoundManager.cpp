@@ -1,10 +1,10 @@
 #include "SoundManager.h"
 
-SoundManager::SoundManager()
+SoundManager::SoundManager() : Observer(), game_(nullptr)
 {
 }
 
-SoundManager::SoundManager(SDLGame * game)
+SoundManager::SoundManager(SDLGame * game) : Observer(), game_(game)
 {
 }
 
@@ -14,23 +14,35 @@ SoundManager::~SoundManager()
 
 void SoundManager::receive(Message * msg)
 {
-	/*
 	switch ( msg->id_ ) {
 		case BULLET_CREATED:
-		…
-		break;
+		{
+			game_->getResources()->getSoundEffect(Resources::GunShot)->play();
+			break;
+		}
+
 		case BULLET_ASTEROID_COLLISION:
-		…
-		break;
-		case ASTROID_FIGHTER_COLLISION:
-		…
-		break;
+		{
+			game_->getResources()->getSoundEffect(Resources::ExplosionSound)->play();
+			break;
+		}
+
+		case ASTEROID_FIGHTER_COLLISION:
+		{
+			game_->getResources()->getSoundEffect(Resources::Paddle_Hit)->play();
+			break;
+		}
+
 		case ROUND_START:
-		…
-		break;
+		{
+			game_->getResources()->getMusic(Resources::ImperialMarch)->play();
+			break;
+		}
+
 		case ROUND_OVER:
-		…
-		break;
-		…
-	}*/
+		{
+			game_->getResources()->getMusic(Resources::ImperialMarch)->pause();
+			break;
+		}
+	}
 }

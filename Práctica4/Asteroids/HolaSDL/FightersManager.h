@@ -11,7 +11,7 @@
 class FightersManager : public GameObject, public Observer {
 public:
 	FightersManager();
-	FightersManager(SDLGame* game, Observer* bulletsMamager);
+	FightersManager(SDLGame* game, Observer* bulletsManager);
 	virtual ~FightersManager();
 
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
@@ -23,6 +23,7 @@ public:
 
 private:
 	Fighter* fighter_;
+
 	CircularMotionPhysics circularMotionComp_;
 	AccelerationInputComponent accelerationComp_;
 	ImageRenderer renderComp_;

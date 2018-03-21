@@ -5,11 +5,13 @@
 #include "BasicMotionPhysics.h"
 #include "FillRectRenderer.h"
 #include "ImageRenderer.h"
+#include "Observable.h"
+#include "Observer.h"
 
 
 ExampleGame::ExampleGame() :
-	SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
-	//initGame();
+	SDLGame("AstEroids", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
+	initGame();
 	exit_ = false;
 }
 
@@ -18,43 +20,41 @@ ExampleGame::~ExampleGame()
 	//closeGame();
 }
 
-/*void ExampleGame::initGame() {
+void ExampleGame::initGame() {
+	bulletsManager_ = StarTrekBulletManager(this);
+	fightersManager_ = FightersManager(this, &bulletsManager_);
+	asteroidsManager_ = AsteroidsManager(this);
+	collisionManager_ = CollisionManager(this, &bulletsManager_, &asteroidsManager_, &fightersManager_);
+	gameManager_ = GameManager(this);
+	soundManager_ = SoundManager(this);
 
-	// hide cursor
-	SDL_ShowCursor(0);
+	//Observables del SoundManager
+	collisionManager_.registerObserver(&soundManager_);
+	collisionManager_.registerObserver(&gameManager_);
+	collisionManager_.registerObserver(&bulletsManager_);
+	collisionManager_.registerObserver(&asteroidsManager_);
 
-	// normal game object
-	demoObj_ = new DemoActor(this);
-	demoObj_->setWidth(10);
-	demoObj_->setHeight(10);
-	demoObj_->setPosition(
-			Vector2D(getWindowWidth() / 2 - 5, getWindowHeight() / 2 - 5));
-	demoObj_->setVelocity(Vector2D(1, 1));
-	actors_.push_back(demoObj_);
+	bulletsManager_.registerObserver(&soundManager_);
+	bulletsManager_.registerObserver(&gameManager_);
+	bulletsManager_.registerObserver(&asteroidsManager_);
 
-	// game object based on component
-	demoComp_ = new GameComponent(this);
-	inputComp_ = new BasicKBCtrlComponent(SDLK_a, SDLK_s, SDLK_w, SDLK_z,
-			SDLK_d);
-	physicsComp_ = new BasicMotionPhysics();
+	asteroidsManager_.registerObserver(&soundManager_);
+	asteroidsManager_.registerObserver(&gameManager_);
+	asteroidsManager_.registerObserver(&bulletsManager_);
 
-	// choose either the filled rectangle or the image renderer
-	//
-	//	renderComp_ = new FillRectRenderer( { COLOR(0x11ff22ff) });
-	renderComp_ = new ImageRenderer( getResources()->getImageTexture(Resources::Star));
+	gameManager_.registerObserver(&soundManager_);
+	gameManager_.registerObserver(&bulletsManager_);
+	gameManager_.registerObserver(&asteroidsManager_);
 
-	demoComp_->setWidth(50);
-	demoComp_->setHeight(50);
-	demoComp_->setPosition(Vector2D(100, 100));
-	demoComp_->setVelocity(Vector2D(1, 0));
-	demoComp_->addInputComponent(inputComp_);
-	demoComp_->addPhysicsComponent(physicsComp_);
-	demoComp_->addRenderComponent(renderComp_);
-	actors_.push_back(demoComp_);
-}*/
+	actors_.push_back(&bulletsManager_);
+	actors_.push_back(&fightersManager_);
+	actors_.push_back(&asteroidsManager_);
+	actors_.push_back(&collisionManager_);
+	actors_.push_back(&gameManager_);
+}
 
-/*void ExampleGame::closeGame() {
-	if (demoObj_ != nullptr)
+void ExampleGame::closeGame() {
+	/*if (demoObj_ != nullptr)
 		delete demoObj_;
 	if (demoComp_ != nullptr)
 		delete demoComp_;
@@ -63,8 +63,8 @@ ExampleGame::~ExampleGame()
 	if (physicsComp_ != nullptr)
 		delete physicsComp_;
 	if (renderComp_ != nullptr)
-		delete renderComp_;
-}*/
+		delete renderComp_;*/
+}
 
 void ExampleGame::start() {
 	exit_ = false;

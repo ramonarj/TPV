@@ -6,6 +6,6 @@ public:
 	CircularMotionPhysics();
 	~CircularMotionPhysics();
 
-	virtual void update(GameObject* o, Uint32 time) {};
+	virtual void update(GameObject* o, Uint32 time);
 };
 

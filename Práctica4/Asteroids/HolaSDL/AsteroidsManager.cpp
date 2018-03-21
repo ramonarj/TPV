@@ -9,6 +9,9 @@ AsteroidsManager::AsteroidsManager() : GameObject(nullptr), Observer(), Observab
 AsteroidsManager::AsteroidsManager(SDLGame * game) : GameObject(game), Observer(), Observable(), numOfAsteroids_(0)
 {
 	initAsteroids();
+	asteroidImage_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Asteroid));
+	circularPhysics_ = CircularMotionPhysics();
+	rotationPhysics_ = RotationPhysics();
 }
 
 
@@ -44,6 +47,10 @@ void AsteroidsManager::receive(Message * msg)
 		Asteroid* a = static_cast<BulletAsteroidCollision*>(msg)->asteroid_;
 		a->setActive(false);
 		numOfAsteroids_--;
+		if (a->getGenerations() > 0)
+			createBabyAsteroid(a);
+		else if (numOfAsteroids_ == 0)
+			send(NO_MORE_ASTEROIDS);
 		break;
 	}
 	case ROUND_START: {
@@ -54,6 +61,8 @@ void AsteroidsManager::receive(Message * msg)
 		break;
 	}
 }
+
+
 
 Asteroid* AsteroidsManager::getAsteroid()
 {
@@ -105,4 +114,23 @@ void AsteroidsManager::initAsteroids()
 	}
 
 	numOfAsteroids_ = 5;
+}
+
+void AsteroidsManager::createBabyAsteroid(Asteroid* a)
+{
+	int generations = a->getGenerations();
+	Vector2D velocity = a->getVelocity();
+	Vector2D position = a->getPosition();
+	int random = 2 + rand() % 3;
+	for (int i = 0; i < random; i++)
+	{
+		a = getAsteroid();
+		int velX = velocity.getX() * 0.8 + rand() % int(velocity.getX() * 0.4);
+		int velY = sqrt(pow(velocity.magnitude(), 2) - pow(velX, 2));
+		velocity.set(velX, velY);
+		a->setVelocity(velocity);
+		a->setPosition(position);
+		a->setGenerations(generations - 1);
+		numOfAsteroids_++;
+	}
 }

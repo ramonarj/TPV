@@ -8,6 +8,7 @@
 #include "GameMsgRenderer.h"
 #include "BadgeTimer.h"
 
+const int ASTEROID_SCORE = 10;
 
 class GameManager : public Container, public Observer, public Observable {
 public:
@@ -24,6 +25,14 @@ public:
 	void receive(Message* msg);
 
 private:
+
+	bool gameOver_;
+	int lives_;
+	bool running_;
+	int score_;
+	bool badge_;
+
+	int brokenAsteroids_;
 
 	ScoreRenderer scoreRenderer_;
 	LiveRenderer livesRenderer_;

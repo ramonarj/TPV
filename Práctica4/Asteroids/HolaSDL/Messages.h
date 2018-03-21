@@ -8,13 +8,13 @@
 enum MessageId {
 	BULLET_ASTEROID_COLLISION,
 	BULLET_FIGHTER_COLLISION,
-	ASTROID_FIGHTER_COLLISION,
+	ASTEROID_FIGHTER_COLLISION,
 	FIGHTER_SHOOT,
 	GAME_OVER,
 	ROUND_START,
 	ROUND_OVER,
 	BULLET_CREATED,
-	NO_MORE_ATROIDS,
+	NO_MORE_ASTEROIDS,
 	BADGE_ON,
 	BADGE_OFF
 };
@@ -46,7 +46,7 @@ struct BulletFighterCollision: Message {
 
 struct AstroidFighterCollision: Message {
 	AstroidFighterCollision(Asteroid* asteroid, Fighter* fighter) :
-			Message(ASTROID_FIGHTER_COLLISION), asteroid_(asteroid), fighter_(
+			Message(ASTEROID_FIGHTER_COLLISION), asteroid_(asteroid), fighter_(
 					fighter) {
 	}
 

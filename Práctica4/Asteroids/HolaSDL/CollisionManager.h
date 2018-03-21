@@ -3,13 +3,14 @@
 #include "BulletsManager.h"
 #include "AsteroidsManager.h"
 #include "FightersManager.h"
+#include "Collisions.h"
 
 class CollisionManager : public GameObject, public Observable {
 public:
 	CollisionManager();
 	CollisionManager(SDLGame* game,
 		BulletsManager* bulletsManager,
-		AsteroidsManager* astroidManager,
+		AsteroidsManager* asteroidManager,
 		FightersManager* fightersManager);
 	virtual ~CollisionManager();
 
