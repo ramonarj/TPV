@@ -22,7 +22,7 @@ private:
 	virtual void shoot(Fighter* owner, Vector2D position, Vector2D velocity);
 
 	vector<Bullet*> bullets_;
-	FillRectRenderer bulletRenderer_;
-	BasicMotionPhysics bulletPhysics_;
+	FillRectRenderer* bulletRenderer_;
+	BasicMotionPhysics* bulletPhysics_;
 };;
 

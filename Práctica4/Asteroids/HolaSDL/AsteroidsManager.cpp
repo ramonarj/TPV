@@ -4,14 +4,17 @@
 
 AsteroidsManager::AsteroidsManager() : GameObject(nullptr), Observer(), Observable(), numOfAsteroids_(0)
 {
+	asteroidImage_ = nullptr;
+	circularPhysics_ = nullptr;
+	rotationPhysics_ = nullptr;
 }
 
 AsteroidsManager::AsteroidsManager(SDLGame * game) : GameObject(game), Observer(), Observable(), numOfAsteroids_(0)
 {
 	initAsteroids();
-	asteroidImage_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Asteroid));
-	circularPhysics_ = CircularMotionPhysics();
-	rotationPhysics_ = RotationPhysics();
+	asteroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Asteroid));
+	circularPhysics_ = new CircularMotionPhysics();
+	rotationPhysics_ = new RotationPhysics();
 }
 
 
@@ -73,9 +76,9 @@ Asteroid* AsteroidsManager::getAsteroid()
 	if (i == asteroids_.size())
 	{
 		Asteroid* a = new Asteroid(game_);
-		a->addRenderComponent(&asteroidImage_);
-		a->addPhysicsComponent(&circularPhysics_);
-		a->addPhysicsComponent(&rotationPhysics_);
+		a->addRenderComponent(asteroidImage_);
+		a->addPhysicsComponent(circularPhysics_);
+		a->addPhysicsComponent(rotationPhysics_);
 		asteroids_.push_back(a);
 		return a;
 	}

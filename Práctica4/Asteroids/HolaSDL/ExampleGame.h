@@ -38,12 +38,12 @@ private:
 
 	vector<GameObject*> actors_;
 
-	StarTrekBulletManager bulletsManager_;
-	FightersManager fightersManager_;
-	AsteroidsManager asteroidsManager_;
-	CollisionManager collisionManager_;
-	GameManager gameManager_;
-	SoundManager soundManager_;
+	StarTrekBulletManager* bulletsManager_;
+	FightersManager* fightersManager_;
+	AsteroidsManager* asteroidsManager_;
+	CollisionManager* collisionManager_;
+	GameManager* gameManager_;
+	SoundManager* soundManager_;
 };
 
 #endif /* EXAMPLEGAME_H_ */

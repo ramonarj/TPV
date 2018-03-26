@@ -3,26 +3,31 @@
 
 
 GameManager::GameManager()
-	: Container(), Observer(), Observable(), 
+	: Container(nullptr), Observer(), Observable(), 
 	gameOver_(false), lives_(0), running_(false), score_(0), badge_(false), brokenAsteroids_(0)
 {
+	scoreRenderer_ = nullptr;
+	livesRenderer_ = nullptr;
+	gameCtrl_ = nullptr;
+	gameMsg_ = nullptr;
+	badgeTimer_ = nullptr;
 }
 
 GameManager::GameManager(SDLGame * game)
 	: Container(game), Observer(), Observable(), 
 	gameOver_(false), lives_(3), running_(true), score_(0), badge_(false), brokenAsteroids_(0)
 {
-	scoreRenderer_ = ScoreRenderer();
-	livesRenderer_ = LiveRenderer();
-	gameCtrl_ = GameCtrlInputComponent();
-	gameMsg_ = GameMsgRenderer();
-	badgeTimer_ = BadgeTimer();
+	scoreRenderer_ = new ScoreRenderer();
+	livesRenderer_ = new LiveRenderer();
+	gameCtrl_ = new GameCtrlInputComponent();
+	gameMsg_ = new GameMsgRenderer();
+	badgeTimer_ = new BadgeTimer();
 	
-	addRenderComponent(&scoreRenderer_);
-	addRenderComponent(&livesRenderer_);
-	addInputComponent(&gameCtrl_);
-	addRenderComponent(&gameMsg_);
-	addPhysicsComponent(&badgeTimer_);
+	addRenderComponent(scoreRenderer_);
+	addRenderComponent(livesRenderer_);
+	addInputComponent(gameCtrl_);
+	addRenderComponent(gameMsg_);
+	addPhysicsComponent(badgeTimer_);
 }
 
 
@@ -93,7 +98,7 @@ void GameManager::receive(Message * msg)
 			{
 				badge_ = true;
 				send(BADGE_ON);
-				badgeTimer_.start(3000);
+				badgeTimer_->start(3000);
 			}
 
 			break;

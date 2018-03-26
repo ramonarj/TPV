@@ -24,12 +24,12 @@ public:
 private:
 	Fighter* fighter_;
 
-	CircularMotionPhysics circularMotionComp_;
-	AccelerationInputComponent accelerationComp_;
-	ImageRenderer renderComp_;
-	RotationInputComp rotationComp_;
-	GunInputComponent gunComp1_;
-	GunInputComponent gunComp2_;
-	BadgeRenderer badgeRenderer_;
+	CircularMotionPhysics* circularMotionComp_;
+	AccelerationInputComponent* accelerationComp_;
+	ImageRenderer* renderComp_;
+	RotationInputComp* rotationComp_;
+	GunInputComponent* gunComp1_;
+	GunInputComponent* gunComp2_;
+	BadgeRenderer* badgeRenderer_;
 };
 

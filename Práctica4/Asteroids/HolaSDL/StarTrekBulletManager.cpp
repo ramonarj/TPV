@@ -6,8 +6,11 @@ StarTrekBulletManager::StarTrekBulletManager(): GameObject(), BulletsManager()
 {
 }
 
-StarTrekBulletManager::StarTrekBulletManager(SDLGame * game): GameObject(game), BulletsManager(),
-	bulletRenderer_(), bulletPhysics_() {}
+StarTrekBulletManager::StarTrekBulletManager(SDLGame * game): GameObject(game), BulletsManager()
+{
+	bulletPhysics_ = new BasicMotionPhysics();
+	bulletRenderer_ = new FillRectRenderer();
+}
 
 StarTrekBulletManager::~StarTrekBulletManager()
 {
@@ -44,8 +47,8 @@ Bullet * StarTrekBulletManager::getBullet()
 	if (i == bullets_.size())
 	{
 		Bullet* b = new Bullet(game_);
-		b->addRenderComponent(&bulletRenderer_);
-		b->addPhysicsComponent(&bulletPhysics_);
+		b->addRenderComponent(bulletRenderer_);
+		b->addPhysicsComponent(bulletPhysics_);
 		bullets_.push_back(b);
 		return b;
 	}

@@ -21,36 +21,36 @@ ExampleGame::~ExampleGame()
 }
 
 void ExampleGame::initGame() {
-	bulletsManager_ = StarTrekBulletManager(this);
-	fightersManager_ = FightersManager(this, &bulletsManager_);
-	asteroidsManager_ = AsteroidsManager(this);
-	collisionManager_ = CollisionManager(this, &bulletsManager_, &asteroidsManager_, &fightersManager_);
-	gameManager_ = GameManager(this);
-	soundManager_ = SoundManager(this);
+	bulletsManager_ = new StarTrekBulletManager(this);
+	fightersManager_ = new FightersManager(this, bulletsManager_);
+	asteroidsManager_ = new AsteroidsManager(this);
+	collisionManager_ = new CollisionManager(this, bulletsManager_, asteroidsManager_, fightersManager_);
+	gameManager_ = new GameManager(this);
+	soundManager_ = new SoundManager(this);
 
 	//Observables del SoundManager
-	collisionManager_.registerObserver(&soundManager_);
-	collisionManager_.registerObserver(&gameManager_);
-	collisionManager_.registerObserver(&bulletsManager_);
-	collisionManager_.registerObserver(&asteroidsManager_);
+	collisionManager_->registerObserver(soundManager_);
+	collisionManager_->registerObserver(gameManager_);
+	collisionManager_->registerObserver(bulletsManager_);
+	collisionManager_->registerObserver(asteroidsManager_);
 
-	bulletsManager_.registerObserver(&soundManager_);
-	bulletsManager_.registerObserver(&gameManager_);
-	bulletsManager_.registerObserver(&asteroidsManager_);
+	bulletsManager_->registerObserver(soundManager_);
+	bulletsManager_->registerObserver(gameManager_);
+	bulletsManager_->registerObserver(asteroidsManager_);
 
-	asteroidsManager_.registerObserver(&soundManager_);
-	asteroidsManager_.registerObserver(&gameManager_);
-	asteroidsManager_.registerObserver(&bulletsManager_);
+	asteroidsManager_->registerObserver(soundManager_);
+	asteroidsManager_->registerObserver(gameManager_);
+	asteroidsManager_->registerObserver(bulletsManager_);
 
-	gameManager_.registerObserver(&soundManager_);
-	gameManager_.registerObserver(&bulletsManager_);
-	gameManager_.registerObserver(&asteroidsManager_);
+	gameManager_->registerObserver(soundManager_);
+	gameManager_->registerObserver(bulletsManager_);
+	gameManager_->registerObserver(asteroidsManager_);
 
-	actors_.push_back(&bulletsManager_);
-	actors_.push_back(&fightersManager_);
-	actors_.push_back(&asteroidsManager_);
-	actors_.push_back(&collisionManager_);
-	actors_.push_back(&gameManager_);
+	actors_.push_back(bulletsManager_);
+	actors_.push_back(fightersManager_);
+	actors_.push_back(asteroidsManager_);
+	actors_.push_back(collisionManager_);
+	actors_.push_back(gameManager_);
 }
 
 void ExampleGame::closeGame() {

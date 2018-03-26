@@ -4,28 +4,33 @@
 
 FightersManager::FightersManager()
 {
+	circularMotionComp_ = nullptr;
+	accelerationComp_ = nullptr;
+	renderComp_ = nullptr;
+	rotationComp_ = nullptr;
+	gunComp1_ = nullptr;
+	gunComp2_ = nullptr;
+	badgeRenderer_ = nullptr;
 }
 
 FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager)
 	: GameObject(game), Observer()
 {
-	circularMotionComp_ = CircularMotionPhysics();
-	accelerationComp_ = AccelerationInputComponent(0.5, 10.0, SDLK_UP, SDLK_DOWN);
-	renderComp_ = ImageRenderer();
-	rotationComp_ = RotationInputComp(5, SDLK_RIGHT, SDLK_LEFT);
-	gunComp1_ = GunInputComponent(dynamic_cast<BulletsManager*>(bulletsManager), SDLK_SPACE, (Uint8)5, (Uint32)3);
-	//dynamic_cast<Observable*>(&gunComp1_)->registerObserver(bulletsManager);
-	gunComp2_ = GunInputComponent(dynamic_cast<BulletsManager*>(bulletsManager), SDLK_SPACE, (Uint8)10000, (Uint32)30);
-	//dynamic_cast<Observable*>(&gunComp2_)->registerObserver(bulletsManager);
-	badgeRenderer_ = BadgeRenderer();
+	circularMotionComp_ = new CircularMotionPhysics();
+	accelerationComp_ = new AccelerationInputComponent(0.5, 10.0, SDLK_UP, SDLK_DOWN);
+	renderComp_ = new ImageRenderer(game_->getResources()->getImageTexture(Resources::Asteroid));
+	rotationComp_ = new RotationInputComp(5, SDLK_RIGHT, SDLK_LEFT);
+	gunComp1_ = new GunInputComponent(dynamic_cast<BulletsManager*>(bulletsManager), SDLK_SPACE, (Uint8)5, (Uint32)3);
+	gunComp2_ = new GunInputComponent(dynamic_cast<BulletsManager*>(bulletsManager), SDLK_SPACE, (Uint8)10000, (Uint32)30);
+	badgeRenderer_ = new BadgeRenderer();
 
 	fighter_ = new Fighter(game, 1);
 
-	fighter_->addPhysicsComponent(&circularMotionComp_);
-	fighter_->addInputComponent(&accelerationComp_);
-	fighter_->addRenderComponent(&renderComp_);
-	fighter_->addInputComponent(&rotationComp_);
-	fighter_->addInputComponent(&gunComp1_);
+	fighter_->addPhysicsComponent(circularMotionComp_);
+	fighter_->addInputComponent(accelerationComp_);
+	fighter_->addRenderComponent(renderComp_);
+	fighter_->addInputComponent(rotationComp_);
+	fighter_->addInputComponent(gunComp1_);
 
 }
 
@@ -70,17 +75,17 @@ void FightersManager::receive(Message * msg)
 
 		case BADGE_ON:
 		{
-			fighter_->delInputComponent(&gunComp1_);
-			fighter_->addInputComponent(&gunComp2_);
-			fighter_->addRenderComponent(&badgeRenderer_);
+			fighter_->delInputComponent(gunComp1_);
+			fighter_->addInputComponent(gunComp2_);
+			fighter_->addRenderComponent(badgeRenderer_);
 			break;
 		}
 
 		case BADGE_OFF:
 		{
-			fighter_->delInputComponent(&gunComp2_);
-			fighter_->addInputComponent(&gunComp1_);
-			fighter_->delRenderComponent(&badgeRenderer_);
+			fighter_->delInputComponent(gunComp2_);
+			fighter_->addInputComponent(gunComp1_);
+			fighter_->delRenderComponent(badgeRenderer_);
 			break;
 		}
 	}

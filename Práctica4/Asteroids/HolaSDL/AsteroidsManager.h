@@ -27,9 +27,9 @@ private:
 
 	vector<Asteroid*> asteroids_;
 
-	ImageRenderer asteroidImage_;
-	CircularMotionPhysics circularPhysics_;
-	RotationPhysics rotationPhysics_;
+	ImageRenderer* asteroidImage_;
+	CircularMotionPhysics* circularPhysics_;
+	RotationPhysics* rotationPhysics_;
 
 	int numOfAsteroids_;
 };

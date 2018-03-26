@@ -34,10 +34,10 @@ private:
 
 	int brokenAsteroids_;
 
-	ScoreRenderer scoreRenderer_;
-	LiveRenderer livesRenderer_;
-	GameCtrlInputComponent gameCtrl_;
-	GameMsgRenderer gameMsg_;
-	BadgeTimer badgeTimer_;
+	ScoreRenderer* scoreRenderer_;
+	LiveRenderer* livesRenderer_;
+	GameCtrlInputComponent* gameCtrl_;
+	GameMsgRenderer* gameMsg_;
+	BadgeTimer* badgeTimer_;
 };
 
