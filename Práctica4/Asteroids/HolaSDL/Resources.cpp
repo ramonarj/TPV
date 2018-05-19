@@ -6,7 +6,7 @@ std::vector<std::string> Resources::imageFiles_ { "images/blank.png",
 		"images/tennis_ball.png", "images/keyboard.png", "images/mouse.png",
 		"images/ai.png", "images/spaceships.png", "images/airplanes.png",
 		"images/star.png", "images/astroid.png", "images/explosion.png",
-		"images/badges.png" };
+		"images/badges.png", "images/background.png" };
 
 std::vector<Resources::FontInfo> Resources::fontFiles_ {
 		{ "fonts/ARIAL.ttf", 16 }, { "fonts/ARIAL.ttf", 24 }, {
@@ -41,10 +41,11 @@ Resources::Resources(SDLGame* game) :
 }
 
 Resources::~Resources() {
+	closeTextTextures();
 	closeImageTextures();
-	closeFonts();
-	closeMusic();
 	closeSoundEffects();
+	closeMusic();
+	closeFonts();
 }
 
 void Resources::setImageTextures(std::vector<std::string> textures) {

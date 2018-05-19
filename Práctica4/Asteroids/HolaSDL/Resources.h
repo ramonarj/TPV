@@ -28,7 +28,8 @@ public:
 		Star,
 		Asteroid,
 		ExplosionImage,
-		Badges
+		Badges, 
+		BackGround
 	};
 
 	// Text Messages - each is loaded as an instance of a texture

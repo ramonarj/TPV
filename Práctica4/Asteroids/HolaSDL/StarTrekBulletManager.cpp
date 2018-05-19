@@ -4,16 +4,24 @@
 
 StarTrekBulletManager::StarTrekBulletManager(): GameObject(), BulletsManager()
 {
+	bulletPhysics_ = nullptr;
+	bulletRenderer_ = nullptr;
 }
 
 StarTrekBulletManager::StarTrekBulletManager(SDLGame * game): GameObject(game), BulletsManager()
 {
 	bulletPhysics_ = new BasicMotionPhysics();
-	bulletRenderer_ = new FillRectRenderer();
+	bulletRenderer_ = new FillRectRenderer({ 255, 0, 0, 255 });
 }
 
 StarTrekBulletManager::~StarTrekBulletManager()
 {
+	for (int i = 0; i < bullets_.size(); i++)
+		delete bullets_[i];
+	if (bulletRenderer_ != nullptr)
+		delete bulletRenderer_;
+	if (bulletPhysics_ != nullptr)
+		delete bulletPhysics_;
 }
 
 void StarTrekBulletManager::handleInput(Uint32 time, const SDL_Event & event)
@@ -25,7 +33,7 @@ void StarTrekBulletManager::update(Uint32 time)
 	for (Bullet* b: bullets_)
 	{
 		if (b->isActive())
-			b -> update(time);
+			b->update(time);
 	}
 }
 
@@ -86,10 +94,14 @@ void StarTrekBulletManager::receive(Message * msg)
 	}
 }
 
-void StarTrekBulletManager::shoot(Fighter * owner, Vector2D position, Vector2D velocity)
+void StarTrekBulletManager::shoot(Fighter* owner, Vector2D position, Vector2D velocity)
 {
 	Bullet* b = getBullet();
 	b->setPosition(position);
 	b->setVelocity(velocity);
-	send(BULLET_CREATED);
+	b->setWidth(3);
+	b->setHeight(3);
+	b->setActive(true);
+
+	send(&Message(BULLET_CREATED));
 }

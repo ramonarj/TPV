@@ -17,7 +17,7 @@ ExampleGame::ExampleGame() :
 
 ExampleGame::~ExampleGame()
 {
-	//closeGame();
+	closeGame();
 }
 
 void ExampleGame::initGame() {
@@ -37,6 +37,7 @@ void ExampleGame::initGame() {
 	bulletsManager_->registerObserver(soundManager_);
 	bulletsManager_->registerObserver(gameManager_);
 	bulletsManager_->registerObserver(asteroidsManager_);
+	bulletsManager_->registerObserver(bulletsManager_);
 
 	asteroidsManager_->registerObserver(soundManager_);
 	asteroidsManager_->registerObserver(gameManager_);
@@ -45,25 +46,31 @@ void ExampleGame::initGame() {
 	gameManager_->registerObserver(soundManager_);
 	gameManager_->registerObserver(bulletsManager_);
 	gameManager_->registerObserver(asteroidsManager_);
+	gameManager_->registerObserver(fightersManager_);
+	gameManager_->registerObserver(gameManager_);
 
 	actors_.push_back(bulletsManager_);
 	actors_.push_back(fightersManager_);
 	actors_.push_back(asteroidsManager_);
 	actors_.push_back(collisionManager_);
 	actors_.push_back(gameManager_);
+
+	gameManager_->setRunning(false);
 }
 
 void ExampleGame::closeGame() {
-	/*if (demoObj_ != nullptr)
-		delete demoObj_;
-	if (demoComp_ != nullptr)
-		delete demoComp_;
-	if (inputComp_ != nullptr)
-		delete inputComp_;
-	if (physicsComp_ != nullptr)
-		delete physicsComp_;
-	if (renderComp_ != nullptr)
-		delete renderComp_;*/
+	if (soundManager_ != nullptr)
+		delete soundManager_;
+	if (gameManager_ != nullptr)
+		delete gameManager_;
+	if (collisionManager_ != nullptr)
+		delete collisionManager_;
+	if (asteroidsManager_ != nullptr)
+		delete asteroidsManager_;
+	if (fightersManager_ != nullptr)
+		delete fightersManager_;
+	if (bulletsManager_ != nullptr)
+		delete bulletsManager_;
 }
 
 void ExampleGame::start() {
@@ -115,7 +122,7 @@ void ExampleGame::update(Uint32 time) {
 }
 
 void ExampleGame::render(Uint32 time) {
-	SDL_SetRenderDrawColor(getRenderer(), COLOR(0x00AAAAFF));
+	SDL_SetRenderDrawColor(getRenderer(), COLOR(0x000000));
 	SDL_RenderClear(getRenderer());
 
 	for (GameObject* o : actors_) {

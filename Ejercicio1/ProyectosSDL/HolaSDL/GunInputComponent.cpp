@@ -18,9 +18,12 @@ void GunInputComponent::handleInput(GameObject* o, Uint32 time,
 
 	if (time_ < timeInterval)
 	{
-		if (numShots < shotsPerInterval) {
-			if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.sym == shootKey) {
+		if (numShots < shotsPerInterval) 
+		{
+			if (event.type == SDL_KEYDOWN) 
+			{
+				if (event.key.keysym.sym == shootKey)
+				{
 
 					Vector2D p(o->getPosition().getX() + (o->getWidth() / 2),
 						o->getPosition().getY() + (o->getHeight() / 2));

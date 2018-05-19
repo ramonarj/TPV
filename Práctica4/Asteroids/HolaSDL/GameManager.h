@@ -8,8 +8,6 @@
 #include "GameMsgRenderer.h"
 #include "BadgeTimer.h"
 
-const int ASTEROID_SCORE = 10;
-
 class GameManager : public Container, public Observer, public Observable {
 public:
 	GameManager();
@@ -22,6 +20,7 @@ public:
 	void setRunning(bool running);
 	int getScore() const;
 	void setBadge(bool b);
+	bool getBadge();
 	void receive(Message* msg);
 
 private:

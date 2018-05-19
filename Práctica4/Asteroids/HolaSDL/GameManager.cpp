@@ -18,7 +18,8 @@ GameManager::GameManager(SDLGame * game)
 	gameOver_(false), lives_(3), running_(true), score_(0), badge_(false), brokenAsteroids_(0)
 {
 	scoreRenderer_ = new ScoreRenderer();
-	livesRenderer_ = new LiveRenderer();
+
+	livesRenderer_ = new LiveRenderer(game_->getResources()->getImageTexture(Resources::Badges));
 	gameCtrl_ = new GameCtrlInputComponent();
 	gameMsg_ = new GameMsgRenderer();
 	badgeTimer_ = new BadgeTimer();
@@ -33,6 +34,16 @@ GameManager::GameManager(SDLGame * game)
 
 GameManager::~GameManager()
 {
+	if (badgeTimer_ != nullptr)
+		delete badgeTimer_;
+	if (gameMsg_ != nullptr)
+		delete gameMsg_;
+	if (gameCtrl_ != nullptr)
+		delete gameCtrl_;
+	if (livesRenderer_ != nullptr)
+		delete livesRenderer_;
+	if (scoreRenderer_ != nullptr)
+		delete scoreRenderer_;
 }
 
 bool GameManager::isGameOver() const
@@ -53,6 +64,10 @@ bool GameManager::isRunning() const
 void GameManager::setRunning(bool running)
 {
 	running_ = running;
+	Message m = { running ? ROUND_START : ROUND_OVER };
+	send(&m);
+	if (gameOver_ && running)
+		gameOver_ = false;
 }
 
 int GameManager::getScore() const
@@ -63,6 +78,14 @@ int GameManager::getScore() const
 void GameManager::setBadge(bool b)
 {
 	badge_ = b;
+
+	Message m = { b ? BADGE_ON : BADGE_OFF };
+	send(&m);
+}
+
+bool GameManager::getBadge()
+{
+	return badge_;
 }
 
 void GameManager::receive(Message * msg)
@@ -72,32 +95,26 @@ void GameManager::receive(Message * msg)
 		{
 			lives_--;
 			brokenAsteroids_ = 0;
-			send(ROUND_OVER);
+			setRunning(false);
 
-			if (badge_)
-			{
-				badge_ = false;
-				send(BADGE_OFF);
-			}
+			setBadge(false);
 
-			if (lives_ < 0)
+			if (lives_ == 0)
 			{
 				gameOver_ = true;
-				send(GAME_OVER);
+				send(&Message(GAME_OVER));
 			}
-
 			break;
 		}
 
 		case BULLET_ASTEROID_COLLISION:
 		{
-			score_ += ASTEROID_SCORE;
-
+			score_ ++;
 			brokenAsteroids_++;
-			if (brokenAsteroids_ == 10)
+
+			if (brokenAsteroids_ == 1)
 			{
-				badge_ = true;
-				send(BADGE_ON);
+				setBadge(true);
 				badgeTimer_->start(3000);
 			}
 
@@ -107,16 +124,25 @@ void GameManager::receive(Message * msg)
 		case NO_MORE_ASTEROIDS:	
 		{
 			brokenAsteroids_ = 0;
-			send(ROUND_OVER);
+			send(&Message(ROUND_OVER));
 
-			running_ = false;
+			setRunning(false);
+			setBadge(false);
 
-			if (badge_)
-			{
-				badge_ = false;
-				send(BADGE_OFF);
-			}
+			game_->stop();
 
+			break;
+		}
+		case ROUND_START:
+		{
+			brokenAsteroids_ = 0;
+			setBadge(false);
+			break;
+		}
+		case ROUND_OVER:
+		{
+			brokenAsteroids_ = 0;
+			setBadge(false);
 			break;
 		}
 	}

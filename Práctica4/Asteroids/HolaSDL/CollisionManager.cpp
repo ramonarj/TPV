@@ -27,19 +27,31 @@ void CollisionManager::update(Uint32 time)
 	Fighter* fighter = fightersManager_->getFighter();
 
 	// fighter with asteroids
-	for (Asteroid* a : asteroids) {
-		if (a->isActive()) {
-			if (Collisions::collidesWithRotation(fighter, a))
-				send(ASTEROID_FIGHTER_COLLISION);
+	if (fighter->isActive())
+	{
+		for (Asteroid* a : asteroids) {
+			if (a->isActive()) {
+				if (Collisions::collidesWithRotation(fighter, a))
+				{
+					AsteroidFighterCollision afc = AsteroidFighterCollision(a, fighter);
+					send(&afc);
+				}
+			}
 		}
-	}
 
-	// bullets with asteroids
-	for (Asteroid* a : asteroids) {
-		if (a->isActive()) {
-			for (Bullet* b : bullets)
-				if (Collisions::collides(a, b))
-					send(BULLET_ASTEROID_COLLISION);
+
+		// bullets with asteroids
+		for (Asteroid* a : asteroids) {
+			if (a->isActive()) {
+				for (Bullet* b : bullets)
+					if (b->isActive()) {
+						if (Collisions::collides(a, b))
+						{
+							BulletAsteroidCollision bac = BulletAsteroidCollision(b, a);
+							send(&bac);
+						}
+					}
+			}
 		}
 	}
 }

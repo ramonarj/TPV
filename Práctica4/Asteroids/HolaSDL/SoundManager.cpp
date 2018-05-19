@@ -41,7 +41,7 @@ void SoundManager::receive(Message * msg)
 
 		case ROUND_OVER:
 		{
-			game_->getResources()->getMusic(Resources::ImperialMarch)->pause();
+			//game_->getResources()->getMusic(Resources::ImperialMarch)->pause();
 			break;
 		}
 	}

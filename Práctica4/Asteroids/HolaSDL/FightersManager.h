@@ -7,6 +7,7 @@
 #include "RotationInputComp.h"
 #include "GunInputComponent.h"
 #include "BadgeRenderer.h"
+#include "SkeletonRenderer.h"
 
 class FightersManager : public GameObject, public Observer {
 public:
@@ -31,5 +32,7 @@ private:
 	GunInputComponent* gunComp1_;
 	GunInputComponent* gunComp2_;
 	BadgeRenderer* badgeRenderer_;
+
+	SkeletonRendered* skeRender_;
 };
 

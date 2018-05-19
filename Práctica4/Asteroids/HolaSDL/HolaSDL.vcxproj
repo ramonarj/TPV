@@ -16,11 +16,10 @@
     <ClInclude Include="AsteroidsManager.h" />
     <ClInclude Include="BadgeRenderer.h" />
     <ClInclude Include="BadgeTimer.h" />
-    <ClInclude Include="BasicKBCtrlComponent.h" />
     <ClInclude Include="BasicMotionPhysics.h" />
-    <ClInclude Include="BounceOnBordersPhysics.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletsManager.h" />
+    <ClInclude Include="checkML.h" />
     <ClInclude Include="CircularMotionPhysics.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Collisions.h" />
@@ -67,9 +66,7 @@
     <ClCompile Include="AsteroidsManager.cpp" />
     <ClCompile Include="BadgeRenderer.cpp" />
     <ClCompile Include="BadgeTimer.cpp" />
-    <ClCompile Include="BasicKBCtrlComponent.cpp" />
     <ClCompile Include="BasicMotionPhysics.cpp" />
-    <ClCompile Include="BounceOnBordersPhysics.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletsManager.cpp" />
     <ClCompile Include="CircularMotionPhysics.cpp" />

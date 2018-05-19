@@ -44,8 +44,8 @@ struct BulletFighterCollision: Message {
 	Fighter* fighter_;
 };
 
-struct AstroidFighterCollision: Message {
-	AstroidFighterCollision(Asteroid* asteroid, Fighter* fighter) :
+struct AsteroidFighterCollision: Message {
+	AsteroidFighterCollision(Asteroid* asteroid, Fighter* fighter) :
 			Message(ASTEROID_FIGHTER_COLLISION), asteroid_(asteroid), fighter_(
 					fighter) {
 	}

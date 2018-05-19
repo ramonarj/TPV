@@ -5,6 +5,7 @@
 #include "ImageRenderer.h"
 #include "CircularMotionPhysics.h"
 #include "RotationPhysics.h"
+#include "SkeletonRenderer.h"
 #include <algorithm>
 
 class AsteroidsManager : public GameObject, public Observer, public Observable{
@@ -30,6 +31,7 @@ private:
 	ImageRenderer* asteroidImage_;
 	CircularMotionPhysics* circularPhysics_;
 	RotationPhysics* rotationPhysics_;
+	SkeletonRendered* skeRender_;
 
 	int numOfAsteroids_;
 };

@@ -18,9 +18,10 @@ private:
 	SDL_Keycode shootKey;
 
 	Uint8 shotsPerInterval;
-	Uint8 numShots;
+	int numShots;
 
 	Uint32 timeInterval;
+	Uint32 timePerShot;
 	Uint32 time_;
 };
 
